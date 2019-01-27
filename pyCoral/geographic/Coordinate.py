@@ -1,6 +1,6 @@
 from shapely import geometry as sg
 
-from Units import Units # pylint: disable=import-error
+from pyCoral.Units import Units # pylint: disable=import-error
 
 class Coordinate:
     def __init__(self, lon = 0, lat = 0):

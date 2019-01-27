@@ -2,14 +2,14 @@ import unittest
 from os import path
 import sys
 
-dirpath = path.abspath(path.join(__file__, '../../../src'))
+dirpath = path.abspath(path.join(__file__, '../../..'))
 sys.path.append(dirpath)
 
 # pylint: disable=import-error
-from Units import Units
-from geographic.LineString import LineString
-from geographic.Coordinate import Coordinate
-from geographic import Algorithms
+from pyCoral.Units import Units
+from pyCoral.geographic.LineString import LineString
+from pyCoral.geographic.Coordinate import Coordinate
+from pyCoral.geographic import Algorithms
 # pylint: enable=import-error
 
 class AlgorithmsTests(unittest.TestCase):

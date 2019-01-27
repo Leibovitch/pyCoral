@@ -1,6 +1,6 @@
 from shapely import geometry as sg
 
-from geographic.Coordinate import Coordinate # pylint: disable=import-error
+from pyCoral.geographic.Coordinate import Coordinate # pylint: disable=import-error
 
 class LineString:
     def __init__(self, coordinate_list = []):

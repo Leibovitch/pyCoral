@@ -1,7 +1,7 @@
 import geopandas as gpd
 
 # pylint: disable=import-error
-from Units import Units
+from pyCoral.Units import Units
 # pylint: enable=import-error
 
 def distance(geometry1, geometry2):
