@@ -1,3 +1,5 @@
+from shapely import geometry as sg
+
 from Units import Units # pylint: disable=import-error
 
 class Coordinate:
@@ -12,6 +14,10 @@ class Coordinate:
         if isinstance(lon, deg_class) and isinstance(lat, deg_class):
             self._lon = lon
             self._lat = lat
+            self._shapely_point = sg.Point([
+                lon / Units.deg,
+                lat / Units.deg
+            ])
         else:
             raise TypeError('lon, lat must be one of [int, float, Units.deg]')
 
@@ -20,6 +26,9 @@ class Coordinate:
 
     def lat(self):
         return self._lat
+
+    def shapely(self):
+        return self._shapely_point
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
