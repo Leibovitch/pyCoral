@@ -32,5 +32,11 @@ class LineStringTests(unittest.TestCase):
         l2 = LineString([ Coordinate(30, 31.0), Coordinate(30, 32.0) ])
         self.assertNotEqual(l1, l2)
 
+    def test_coordinates(self):
+        coords = [ Coordinate(30, 30), Coordinate(30, 31) ]
+        l1 = LineString(coords)
+
+        self.assertEqual(l1.coordinates(), coords)
+
 if __name__ == '__main__':
     unittest.main()

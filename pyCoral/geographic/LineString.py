@@ -1,11 +1,10 @@
 from shapely import geometry as sg
 
-from pyCoral.geographic.Coordinate import Coordinate # pylint: disable=import-error
+from pyCoral.geographic import Coordinate # pylint: disable=import-error
 
 class LineString:
     def __init__(self, coordinate_list = []):
         if isinstance(coordinate_list, list) and all(isinstance(coord, Coordinate) for coord in coordinate_list):
-            self._coords = coordinate_list
             self._shapely_line = sg.LineString(
                 c.shapely() for c in coordinate_list
             )
@@ -13,7 +12,7 @@ class LineString:
             raise TypeError('coordinate_list must be a list of Coordinates')
 
     def coordinates(self):
-        return self._coords
+        return map(lambda c: Coordinate(c.x, c.y), self._shapely_line.coords)
 
     def shapely(self):
         return self._shapely_line
