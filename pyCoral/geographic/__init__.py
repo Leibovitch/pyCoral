@@ -1,4 +1,4 @@
-from pyCoral.geographic.Coordinate import Coordinate
+from pyCoral.geographic.Point import Point
 from pyCoral.geographic.LineString import LineString
 from pyCoral.geographic.Route import Route
 from pyCoral.geographic import Algorithms

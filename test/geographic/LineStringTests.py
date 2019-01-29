@@ -5,16 +5,14 @@ import sys
 dirpath = path.abspath(path.join(__file__, '../../..'))
 sys.path.append(dirpath)
 
-# pylint: disable=import-error
 from pyCoral.geographic.LineString import LineString
-from pyCoral.geographic.Coordinate import Coordinate
-# pylint: enable=import-error
+from pyCoral.geographic.Point import Point
 
 class LineStringTests(unittest.TestCase):
 
     def test_ctor_defaultValues_initialize(self):
         l = LineString()
-        self.assertEqual(l._coords, [])
+        self.assertEqual(l.points(), [])
 
     def test_ctor_badInitialValues_raiseException(self):
         self.assertRaises(TypeError, LineString, 30)
@@ -23,20 +21,20 @@ class LineStringTests(unittest.TestCase):
         self.assertRaises(TypeError, LineString, [20, 20])
 
     def test_equal(self):
-        l1 = LineString([ Coordinate(30, 30), Coordinate(30, 31) ])
-        l2 = LineString([ Coordinate(30, 30.0), Coordinate(30, 31.0) ])
+        l1 = LineString([ Point(30, 30), Point(30, 31) ])
+        l2 = LineString([ Point(30, 30.0), Point(30, 31.0) ])
         self.assertEqual(l1, l2)
 
     def test_non_equal(self):
-        l1 = LineString([ Coordinate(30, 30), Coordinate(30, 31) ])
-        l2 = LineString([ Coordinate(30, 31.0), Coordinate(30, 32.0) ])
+        l1 = LineString([ Point(30, 30), Point(30, 31) ])
+        l2 = LineString([ Point(30, 31.0), Point(30, 32.0) ])
         self.assertNotEqual(l1, l2)
 
-    def test_coordinates(self):
-        coords = [ Coordinate(30, 30), Coordinate(30, 31) ]
-        l1 = LineString(coords)
+    def test_Points(self):
+        points = [ Point(30, 30), Point(30, 31) ]
+        l1 = LineString(points)
 
-        self.assertEqual(l1.coordinates(), coords)
+        self.assertEqual(l1.points(), points)
 
 if __name__ == '__main__':
     unittest.main()

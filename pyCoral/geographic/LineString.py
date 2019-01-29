@@ -1,25 +1,25 @@
 from shapely import geometry as sg
 
-from pyCoral.geographic import Coordinate # pylint: disable=import-error
+from pyCoral.geographic.Point import Point # pylint: disable=import-error
 
 class LineString:
-    def __init__(self, coordinate_list = []):
-        if isinstance(coordinate_list, list) and all(isinstance(coord, Coordinate) for coord in coordinate_list):
+    def __init__(self, point_list = []):
+        if isinstance(point_list, list) and all(isinstance(p, Point) for p in point_list):
             self._shapely_line = sg.LineString(
-                c.shapely() for c in coordinate_list
+                c.shapely() for c in point_list
             )
         else:
-            raise TypeError('coordinate_list must be a list of Coordinates')
+            raise TypeError('point_list must be a list of Points')
 
-    def coordinates(self):
-        return map(lambda c: Coordinate(c.x, c.y), self._shapely_line.coords)
+    def points(self):
+         return list(map(lambda c: Point(c[0], c[1]), self._shapely_line.coords))
 
     def shapely(self):
         return self._shapely_line
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
-            return self.coordinates() == other.coordinates()
+            return self.points() == other.points()
         else:
             return False
 

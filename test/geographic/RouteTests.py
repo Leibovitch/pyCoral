@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import unittest
 
 # pylint: disable=import-error
-from pyCoral.geographic import Coordinate, Route
+from pyCoral.geographic import Point, Route
 # pylint: enable=import-error
 
 class RouteTests(unittest.TestCase):
@@ -11,13 +11,13 @@ class RouteTests(unittest.TestCase):
     def input(self):
         return [{
             'time': datetime.strptime('1/1/2018', '%d/%m/%Y'),
-            'location': Coordinate(0, 0)
+            'location': Point(0, 0)
         },{
             'time': datetime.strptime('2/1/2018', '%d/%m/%Y'),
-            'location': Coordinate(0, 1)
+            'location': Point(0, 1)
         },{
             'time': datetime.strptime('3/1/2018', '%d/%m/%Y'),
-            'location': Coordinate(0, 2)
+            'location': Point(0, 2)
         }]
 
     def test_ctor_defaultValues_initializeEmptyList(self):
@@ -52,16 +52,16 @@ class RouteTests(unittest.TestCase):
         r1 = Route(input)
 
         result = r1.interpolate(input[1]['time'])
-        self.assertIsInstance(result, Coordinate)
-        self.assertEqual(result, Coordinate(0, 1))
+        self.assertIsInstance(result, Point)
+        self.assertEqual(result, Point(0, 1))
 
     def test_interpolate_midPoint(self):
         input = self.input()
         r1 = Route(input)
 
         result = r1.interpolate(input[0]['time'] + timedelta(hours=12))
-        self.assertIsInstance(result, Coordinate)
-        self.assertEqual(result, Coordinate(0, 0.5))
+        self.assertIsInstance(result, Point)
+        self.assertEqual(result, Point(0, 0.5))
 
 
 if __name__ == '__main__':

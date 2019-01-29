@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from pyCoral.Units import Units, fromTimedelta
-from pyCoral.geographic import Coordinate, Algorithms
+from pyCoral.geographic import Point, Algorithms
 
 class Route:
     def __init__(self, vec4_list=[]):
@@ -17,7 +17,7 @@ class Route:
             raise TypeError('vec4_list must be a list of dict containing time and location')
 
     def validate_vec4(self, vec4):
-        return isinstance(vec4['time'], datetime) and isinstance(vec4['location'], Coordinate)
+        return isinstance(vec4['time'], datetime) and isinstance(vec4['location'], Point)
 
     def interpolate(self, time):
         if not (self._start_time < time <= self._end_time):
@@ -33,7 +33,7 @@ class Route:
         velocity = distance / fromTimedelta(v2['time'] - v1['time'])
         azimuth = Algorithms.azimuth(v1['location'], v2['location'])
 
-        result = Coordinate.move(v1, azimuth, velocity * fromTimedelta(time - v1['time']))
+        result = v1['location'].translate(azimuth, velocity * fromTimedelta(time - v1['time']))
 
         return result
 
