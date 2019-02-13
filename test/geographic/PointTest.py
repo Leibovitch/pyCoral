@@ -1,14 +1,8 @@
 import unittest
 from os import path
 import sys
-
-dirpath = path.abspath(path.join(__file__, '../../..'))
-sys.path.append(dirpath)
-
-# pylint: disable=import-error
-from pyCoral.geographic.Point import Point
-from pyCoral.Units import Units
-# pylint: enable=import-error
+from pyCoral.geographic import Point
+from pyCoral import Units
 
 class PointTests(unittest.TestCase):
 

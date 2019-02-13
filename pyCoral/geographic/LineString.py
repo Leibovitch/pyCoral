@@ -1,5 +1,5 @@
 from shapely import geometry as sg
-
+from pyCoral import Units
 from pyCoral.geographic.Point import Point # pylint: disable=import-error
 
 class LineString:

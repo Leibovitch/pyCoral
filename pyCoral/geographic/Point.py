@@ -20,9 +20,21 @@ class Point:
                 lon / Units.deg,
                 lat / Units.deg
             ])
+            self._geopandas = gpd.GeoSeries(self._shapely_point)
         else:
             raise TypeError('lon, lat must be one of [int, float, Units.deg]')
 
+    @classmethod
+    def from_tuple(class_object, point_tuple):
+        return class_object(point_tuple[0], point_tuple[1])
+
+    @classmethod
+    def from_shapely(class_object, shapely_object):
+        return class_object(shapely_object.coords[0], shapely_object.coords[1])
+
+    def geopandas(self):
+        return self._geopandas
+            
     def to_mercator(self):
         p1 = gpd.GeoSeries([self.shapely()])
         p1.crs = { 'init': 'epsg:4326' }

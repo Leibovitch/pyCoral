@@ -35,3 +35,30 @@ def azimuth(point1, point2):
         factor = 1 
 
     return (((np.arccos( delta_y /norm )[0] * factor) * Units.radian)).to(Units.degree)
+
+def within(geometry1, geometry2):
+    # returns a boolean
+    contained = geometry1.geopandas()
+    containing = geometry2.geopandas()
+    within_series = contained.within(containing)
+    return within_series[0]
+
+def contains(geometry1, geometry2):
+    # returns a boolean
+    containing = geometry1.geopandas()
+    contained = geometry2.geopandas()
+    within_series = containing.within(contained)
+    return within_series[0]
+
+def intersrects(geometry1, geometry2):
+    gp1 = geometry1.geopandas()
+    gp2 = geometry2.geopandas()
+    intersection_series = gp1.intersection(gp2)
+    return intersection_series[0]
+
+def return_intersection(geometry1, geometry2):
+    gp1 = geometry1.geopandas()
+    gp2 = geometry2.geopandas()
+    intersection = gp1.intersection(gp2) 
+    return intersection   
+
